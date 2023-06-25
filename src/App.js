@@ -11,7 +11,7 @@ const App = () => {
           
         <Route>
             <Login />
-            </Route>
+          </Route>
           
             <Route>
             <Dashboard />
