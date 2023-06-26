@@ -10,7 +10,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Check if username and password match
+    
     if (username === 'admin' && password === 'password') {
       history.push('/dashboard');
     } else {
@@ -19,9 +19,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex items-center justify-center h-screen">
       <form onSubmit={handleLogin} className="p-6 bg-white rounded shadow-md">
-        <h2 className="text-2xl font-bold mb-6">Login</h2>
+        <h2 className="mb-6 text-2xl font-bold text-red-300">Login</h2>
         <div className="mb-4">
           <label htmlFor="username" className="block mb-2 font-medium">Username:</label>
           <input
@@ -29,7 +29,7 @@ const Login = () => {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full border border-gray-300 rounded py-2 px-3"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
           />
         </div>
         <div className="mb-6">
@@ -39,10 +39,10 @@ const Login = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-gray-300 rounded py-2 px-3"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white rounded py-2 px-4 hover:bg-blue-600">
+        <button type="submit" className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">
           Login
         </button>
       </form>
