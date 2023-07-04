@@ -9,7 +9,15 @@ const Dashboard = () => {
         <h1 className="text-5xl font-bold underline">
         Hello world!
       </h1>
-        {/* Add more dashboard content here */}
+      <div class="flex flex-col items-center justify-center h-screen">
+      <div class="top-bar bg-purple-500 py-4">
+        <button class="top-bar-button">Click Me</button>
+      </div>
+      <div class="chart-container mt-8 rounded-lg shadow-xl">
+        
+      </div>
+    </div>
+    
       </div>
     </div>
   );
