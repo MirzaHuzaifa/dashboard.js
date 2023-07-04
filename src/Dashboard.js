@@ -1,24 +1,49 @@
 import React from 'react';
+// import { useState } from 'react';
+import { Chart } from "react-google-charts";
+
+// const [loggedOut, setLoggedOut]=useState('')
+
+const data = [
+  ['Year', 'Sales', 'Expense', 'Profit'],
+  ["2016", 3000, 800, 500],
+  ["2017", 2000, 600, 400],
+  ["2018", 1000, 500, 200],
+  ["2019", 3000, 900, 700],
+  ["2020", 1000, 400, 100]
+]
+
+const options = {
+  chart: {
+    title: 'Company Performance',
+    subtitle: 'Sales, Expense, and profit 2016 to 2020'
+  }
+}
 
 const Dashboard = () => {
-  return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="p-6 bg-white rounded shadow-md">
-        <h2 className="mb-6 text-2xl font-bold">Welcome to the Dashboard!</h2>
-        <p className="text-gray-700">This is your dashboard content.</p>
-        <h1 className="text-5xl font-bold underline">
-        Hello world!
-      </h1>
-      <div class="flex flex-col items-center justify-center h-screen">
-      <div class="top-bar bg-purple-500 py-4">
-        <button class="top-bar-button">Click Me</button>
-      </div>
-      <div class="chart-container mt-8 rounded-lg shadow-xl">
-        
-      </div>
-    </div>
+
+//   const logOut = {
     
-      </div>
+//   }
+  
+  return (
+    <div>
+    <div class="bg-gray-900 text-white py-2 px-4 flex items-center">
+    <button class="mr-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+    Login
+    </button>
+    
+  </div>
+    <div className="flex items-center justify-center h-screen ">
+
+    <Chart 
+    chartType='Bar'
+    data={data}
+    options={options}
+    width="80%"
+    height="400px"
+    />
+    </div>
     </div>
   );
 };

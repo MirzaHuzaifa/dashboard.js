@@ -17,7 +17,7 @@ const Login = () => {
   console.log(username,'username')
 
   const handleLogin = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     
     if (username === 'admin' && password === 'password') {
