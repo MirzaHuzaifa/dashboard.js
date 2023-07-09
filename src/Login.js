@@ -5,25 +5,52 @@ import { useHistory } from 'react-router-dom';
 // import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import DivisionComponent from "./DivisionComponent";
+import axios from 'axios';
+
 
 
 
 const Login = () => {
 
   
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
-  console.log(username,'username')
 
-  const handleLogin = (e) => {
-    // e.preventDefault();
+  // const handleLogin = (e) => {
+  //   // e.preventDefault();
 
     
-    if (username === 'admin' && password === 'password') {
-      history.push('/dashboard');
-    } else {
-      alert('Invalid username or password');
+  //   if (username === 'admin' && password === 'password') {
+  //     history.push('/dashboard');
+  //   } else {
+  //     alert('Invalid username or password');
+  //   }
+  // };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('https://api.dmsprojects.net/api/v1/authenticate', {
+        email: email,
+        password: password,
+      });
+      console.log(response,'response 128999999999000000000000000000000000000000000000000000000000000000003')
+
+      
+      const token = response?.data?.token;
+      console.log(token,'token 123')
+      
+      if (token) {
+  
+        history.push('/dashboard');
+      } else {
+        alert('Failed to authenticate. Invalid email or password.');
+      }
+    } catch (error) {
+      console.error('Error occurred during authentication:', error);
+      alert('An error occurred during authentication. Please try again later.');
     }
   };
   
@@ -44,10 +71,10 @@ const Login = () => {
             id="email"
            
             placeholder="Enter your email"
-            label="username" 
+            label="email" 
             variant="outlined" 
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         
          
@@ -70,9 +97,9 @@ const Login = () => {
           </div>
           <div className="flex items-center justify-between">
           
-         <div class="flex items-center space-x-4">
-          <label class="inline-flex items-center cursor-pointer">
-          <input type="checkbox" class="form-checkbox mr-3 h-5 w-5 text-blue-500"/>
+         <div className="flex items-center space-x-4">
+          <label className="inline-flex items-center cursor-pointer">
+          <input type="checkbox" className="w-5 h-5 mr-3 text-blue-500 form-checkbox"/>
           <span>Remember me</span>
           </label>
         </div>

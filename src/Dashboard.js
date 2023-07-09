@@ -30,7 +30,7 @@ const Dashboard = () => {
     <div>
     <div class="bg-gray-900 text-white py-2 px-4 flex items-center">
     <button class="mr-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-    Login
+    Logout
     </button>
     
   </div>
