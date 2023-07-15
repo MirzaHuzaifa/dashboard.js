@@ -28,30 +28,62 @@ const Login = () => {
   //   }
   // };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const response = await axios.post('https://api.dmsprojects.net/api/v1/authenticate', {
-        email: email,
-        password: password,
-      });
-      console.log(response,'response 128999999999000000000000000000000000000000000000000000000000000000003')
+  //   try {
+  //     const response = await axios.post('https://api.dmsprojects.net/api/v1/authenticate', {
+  //       email: email,
+  //       password: password,
+  //     });
+  //     console.log(response,'response 128999999999000000000000000000000000000000000000000000000000000000003')
 
       
-      const token = response?.data?.token;
-      console.log(token,'token 123')
+
+  //     const token = response?.data?.token;
+  //     console.log(token,'token 123')
       
-      if (token) {
+  //     if (token) {
   
-        history.push('/dashboard');
-      } else {
-        alert('Failed to authenticate. Invalid email or password.');
-      }
-    } catch (error) {
-      console.error('Error occurred during authentication:', error);
-      alert('An error occurred during authentication. Please try again later.');
-    }
+  //       history.push('/dashboard');
+  //     } else {
+  //       alert('Failed to authenticate. Invalid email or password.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error occurred during authentication:', error);
+  //     alert('An error occurred during authentication. Please try again later.');
+  //   }
+  // };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // try {
+    axios
+      .post('https://api.dmsprojects.net/api/v1/authenticate', {
+        email,
+        password,
+      })
+      .then((response) => {
+        const token = response?.data?.token;
+        localStorage.setItem("token", token);
+        
+
+        console.log(response.data, "response");
+        // dispatch(loginHandler(response.data.data));
+        // window.location.href = "/";
+
+        // const token = response?.data?.token;
+        if (token) {
+  
+                history.push('/dashboard');
+        }
+      })
+      .catch((error) => {
+        const errorMessage =
+          error.response?.data?.message || "Login failed. Please try again.";
+        console.log(error.response.data, "erorrr");
+        // showSnackbar(errorMessage, "error");
+      });
   };
   
   return (

@@ -1,49 +1,50 @@
-import React from 'react';
-// import { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
-
-// const [loggedOut, setLoggedOut]=useState('')
-
-const data = [
-  ['Year', 'Sales', 'Expense', 'Profit'],
-  ["2016", 3000, 800, 500],
-  ["2017", 2000, 600, 400],
-  ["2018", 1000, 500, 200],
-  ["2019", 3000, 900, 700],
-  ["2020", 1000, 400, 100]
-]
-
-const options = {
-  chart: {
-    title: 'Company Performance',
-    subtitle: 'Sales, Expense, and profit 2016 to 2020'
-  }
-}
+import axios from "axios";
 
 const Dashboard = () => {
+  const [datatwo, setDataTwo] = useState([]);
 
-//   const logOut = {
-    
-//   }
-  
+  const fetchData = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.get(
+        "https://api.dmsprojects.net/api/v1/country-overview/ACY00011",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data, "data console");
+
+      const data = response.data.res.labels.map((label, i) => [
+        label,
+        response.data.res.data[0][i],
+        response.data.res.data[1][i],
+      ]);
+
+      setDataTwo(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("hello world");
+    fetchData();
+  }, []);
+
   return (
     <div>
-    <div class="bg-gray-900 text-white py-2 px-4 flex items-center">
-    <button class="mr-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-    Logout
-    </button>
-    
-  </div>
-    <div className="flex items-center justify-center h-screen ">
-
-    <Chart 
-    chartType='Bar'
-    data={data}
-    options={options}
-    width="80%"
-    height="400px"
-    />
-    </div>
+      <div className="flex items-center px-4 py-2 text-white bg-gray-900">
+        <button className="px-4 py-2 mr-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-600">
+          Logout
+        </button>
+      </div>
+      <div className="flex items-center justify-center h-screen">
+        <Chart chartType="Bar" data={datatwo} width="80%" height="400px" />
+      </div>
     </div>
   );
 };
