@@ -23,7 +23,10 @@ const Dashboard = () => {
         response.data.res.data[0][i],
         response.data.res.data[1][i],
       ]);
-
+      
+       data.unshift (['Country Overview', 'Budget', 'Awarded']);
+       console.log (data);
+    
       setDataTwo(data);
     } catch (error) {
       console.error(error);
